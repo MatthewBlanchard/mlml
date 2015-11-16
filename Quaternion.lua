@@ -46,6 +46,10 @@ function Quaternion.fromAxisAngle(axis, angle)
     return Quaternion(s * axis.x, s * axis.y, s * axis.z, cos(angle/2))
 end
 
+function Quaternion.fromVector(v, w)
+	return Quaternion(v.x, v.y, v.z, w)
+end
+
 -- Methods
 function Quaternion.normal(a)
 	local mag = sqrt(a.w * a.w + a.x * a.x + a.y * a.y + a.z * a.z)
@@ -53,12 +57,8 @@ function Quaternion.normal(a)
 end
 
 function Quaternion.rotateVector3(a, b)
-	local bp = getmetatable(b)
-	local b = Object.__cast(b, Quaternion)
-
+	local b = Quaternion.fromVector(b)
 	local result = Quaternion.__mul(Quaternion.__mul(a, b), Quaternion.conjugate(a))
-
-	Object.__cast(b, bp)
 	return Vector3(result.x, result.y, result.z)
 end
 
