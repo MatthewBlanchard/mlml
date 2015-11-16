@@ -1,4 +1,4 @@
-local sqrt = math.sqrt
+require "Object"
 
 Vector3 = Object()
 
@@ -52,7 +52,7 @@ end
 
 -- Methods
 function Vector3.magnitude(a)
-	return sqrt(a.x * a.x + a.y * a.y + a.z * a.z)
+	return math.sqrt(a.x * a.x + a.y * a.y + a.z * a.z)
 end
 
 function Vector3.normal(a)
